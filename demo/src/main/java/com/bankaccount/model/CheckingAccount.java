@@ -25,10 +25,20 @@ public class CheckingAccount extends BankAccount {
         if (amount <= 0) {
             throw new InvalidAmountException("Withdrawal amount must be positive");
         }
-        if (getBalance() - amount < -overdraftLimit) {
+        double newBalance = getBalance() - amount;
+        if (newBalance < -overdraftLimit) {
             throw new InsufficientFundsException("Exceeds overdraft limit");
         }
-        setBalance(getBalance() - amount);
+        setBalance(newBalance);
+    }
+
+    @Override
+    protected void setBalance(double balance) throws InvalidAmountException {
+        // Allow negative balances up to the overdraft limit
+        if (balance < -overdraftLimit) {
+            throw new InvalidAmountException("Balance cannot be less than overdraft limit");
+        }
+        this.balance = balance;
     }
 
     @Override

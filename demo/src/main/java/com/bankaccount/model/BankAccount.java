@@ -3,7 +3,7 @@ package com.bankaccount.model;
 public abstract class BankAccount {
     private String accountNumber;
     private String accountHolder;
-    private double balance;
+    protected double balance;
 
     public BankAccount(String accountNumber, String accountHolder, double initialBalance) throws InvalidAmountException {
         if (accountNumber == null || accountNumber.trim().isEmpty()) {
