@@ -1,5 +1,4 @@
 package com.bankaccount.model;
-
 public class SavingsAccount extends BankAccount {
     private double interestRate;
     private static final double MIN_BALANCE = 100.0;

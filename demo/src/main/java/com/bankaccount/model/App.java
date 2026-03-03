@@ -1,4 +1,4 @@
-package com.bankaccount;
+package com.bankaccount.model;
 
 /**
  * Hello world!
@@ -9,7 +9,7 @@ public final class App {
 
     public static void main(String[] args) {
         java.util.Scanner scanner = new java.util.Scanner(System.in);
-        com.bankaccount.model.Bank bank = new com.bankaccount.model.Bank();
+        Bank bank = new Bank();
         boolean running = true;
 
         while (running) {
@@ -38,7 +38,7 @@ public final class App {
                         System.out.print("Enter interest rate (e.g. 0.02): ");
                         double rate = scanner.nextDouble();
                         scanner.nextLine();
-                        com.bankaccount.model.SavingsAccount sa = new com.bankaccount.model.SavingsAccount(accNum, holder, initBal, rate);
+                        SavingsAccount sa = new SavingsAccount(accNum, holder, initBal, rate);
                         bank.addAccount(sa);
                         System.out.println("Savings account created.");
                         break;

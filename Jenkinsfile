@@ -24,7 +24,7 @@ pipeline {
 
         stage('Build and Test with Maven') {
     steps {
-        sh 'mvn clean test'
+        sh 'mvn clean package'
     }
 }
 
@@ -44,7 +44,7 @@ pipeline {
         success {
             echo "Build and Tests successful! JAR stored in demo/"
 
-            archiveArtifacts artifacts: 'built/*.jar', fingerprint: true
+            archiveArtifacts artifacts: "demo/*.jar", fingerprint: true
         }
         failure {
             echo "Pipeline failed. Check the Jenkins console output to see if a JUnit test failed or if there was a compilation error."
