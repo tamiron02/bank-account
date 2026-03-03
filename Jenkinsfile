@@ -31,10 +31,10 @@ pipeline {
 
        stage('Organize Artifacts') {
     steps {
-        sh '''
+        sh """
             mkdir -p demo
-            find . -name "*.jar" -not -path "*/repository/*" -exec cp {} demo/ \;
-        '''
+            find . -name "*.jar" -not -path "*/repository/*" | xargs -I {} cp {} demo/
+        """
     }
 }
 
@@ -42,7 +42,7 @@ pipeline {
 
     post {
         success {
-            echo "Build and Tests successful! JAR stored in built/"
+            echo "Build and Tests successful! JAR stored in demo/"
 
             archiveArtifacts artifacts: 'built/*.jar', fingerprint: true
         }
