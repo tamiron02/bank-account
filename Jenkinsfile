@@ -17,7 +17,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: "${BRANCH}",
-                    credentialsId: 'jenkins_cret', url: 'https://github.com/tamiron02/bank-account.git'
+                    credentialsId: 'jenkins_cret', 
                     url: "${REPO_URL}"
             }
         }
