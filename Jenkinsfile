@@ -23,13 +23,12 @@ pipeline {
         }
 
         stage('Build and Test with Maven') {
-            steps {
-                dir("${PROJECT_DIR}") {
-                    sh 'chmod +x mvnw'
-                    sh './mvnw clean install'
-                }
-            }
-        }
+    steps {
+        sh 'chmod +x mvnw'
+        sh './mvnw clean test'
+    }
+}
+
 
        stage('Organize Artifacts') {
             steps {
