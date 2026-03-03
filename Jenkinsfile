@@ -24,7 +24,7 @@ pipeline {
 
         stage('Build and Test with Maven') {
     steps {
-        sh './mvnw clean test'
+        sh 'mvn clean test'
     }
 }
 
