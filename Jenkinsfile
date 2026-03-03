@@ -34,7 +34,7 @@ pipeline {
         sh '''
             mkdir -p built
             find . -name "*.jar" -not -path "*/repository/*"
-            cp target/*.jar built/ || cp */target/*.jar built/
+            cp target/*.jar demo/ || cp */target/*.jar demo/
         '''
     }
 }
