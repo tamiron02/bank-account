@@ -24,7 +24,6 @@ pipeline {
 
         stage('Build and Test with Maven') {
     steps {
-        sh 'chmod +x mvnw'
         sh './mvnw clean test'
     }
 }
