@@ -32,7 +32,7 @@ pipeline {
        stage('Organize Artifacts') {
     steps {
         sh '''
-            mkdir -p built
+            mkdir -p demo
             find . -name "*.jar" -not -path "*/repository/*"
             cp target/*.jar demo/ || cp */target/*.jar demo/
         '''
