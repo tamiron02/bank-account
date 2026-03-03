@@ -17,7 +17,7 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 git branch: "${BRANCH}",
-                    credentialsId: 'jenkins-github-creds',
+                    credentialsId: 'jenkins_cret', url: 'https://github.com/tamiron02/bank-account.git'
                     url: "${REPO_URL}"
             }
         }
@@ -33,8 +33,7 @@ pipeline {
     steps {
         sh '''
             mkdir -p demo
-            find . -name "*.jar" -not -path "*/repository/*"
-            cp target/*.jar demo/ || cp */target/*.jar demo/
+            find . -name "*.jar" -not -path "*/repository/*" -exec cp {} demo/ \;
         '''
     }
 }
