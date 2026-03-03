@@ -1,0 +1,48 @@
+stages:
+  - checkout
+  - build
+  - test
+  - organize
+  - archive
+
+variables:
+  BUILD_DIR: "built"
+  REPO_URL: "https://github.com/tamiron02/bank-account.git"
+  BRANCH: "main"
+  PROJECT_DIR: "bank-account"
+
+checkout_code:
+  stage: checkout
+  script:
+    - git clone --branch $BRANCH $REPO_URL $PROJECT_DIR
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "push"'
+
+build:
+  stage: build
+  script:
+    - cd $PROJECT_DIR
+    - mvn clean compile
+
+test:
+  stage: test
+  script:
+    - cd $PROJECT_DIR
+    - mvn test
+
+organize_artifacts:
+  stage: organize
+  script:
+    - cd $PROJECT_DIR
+    - mkdir -p demo
+    - find . -name "*.jar" -not -path "*/repository/*" | xargs -I {} cp {} demo/
+
+archive_artifacts:
+  stage: archive
+  script:
+    - echo "Build and Tests successful! JAR stored in demo/"
+  artifacts:
+    paths:
+      - $PROJECT_DIR/demo/*.jar
+    expire_in: 1 week
+  when: on_success
